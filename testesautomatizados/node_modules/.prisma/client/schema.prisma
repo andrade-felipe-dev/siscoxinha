@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model curso {
+  id Int @id @default(autoincrement())
+  nome String
+  turno String
+}
+
+model produto {
+  id Int @id @default(autoincrement())
+  nome String
+  descricao String
+  item_compra item_compra[]
+}
+
+model item_compra {
+  id Int @id @default(autoincrement())
+  quantidade Int
+  preco Float
+
+  produto_id Int
+  produto produto @relation(fields: [produto_id], references: [id])
+
+  compra_id Int?
+  compra compra? @relation(fields: [compra_id], references: [id])
+}
+
+model compra {
+  id Int @id @default(autoincrement())
+  data DateTime 
+  estado_compra String
+  item_compra item_compra[]
+}

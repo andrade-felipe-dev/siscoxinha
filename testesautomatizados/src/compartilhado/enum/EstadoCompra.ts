@@ -1,0 +1,4 @@
+export enum EstadoCompra {
+    PGTO_CONFIRMADO = "PGTO_CONFIRMADO",
+    PGTO_EM_ABERTO = "PGTO_EM_ABERTO"
+}
